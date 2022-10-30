@@ -1,0 +1,2 @@
+# FoooodBattle
+AutoBattler with Foods
