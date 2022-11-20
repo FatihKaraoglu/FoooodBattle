@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     public void loadScene(string SceneName){
         SceneManager.LoadScene(SceneName);
-        /*SceneManager.sceneLoaded += OnSceneLoaded;*/
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode){
