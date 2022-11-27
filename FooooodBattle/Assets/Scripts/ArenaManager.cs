@@ -73,6 +73,7 @@ public class ArenaManager : MonoBehaviour
 
     public void StartOfTurn() {
         instantiateUnits();
+        NetworkManager.newArenaSession(ArenaManager.Instance.CurrentShopUnits, ArenaManager.Instance.CurrentBoughtUnits);
     }
 
     public void setAttributes(GameObject shopCard)

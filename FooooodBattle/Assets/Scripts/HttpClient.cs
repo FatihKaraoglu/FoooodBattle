@@ -26,10 +26,9 @@ namespace Assets.Scripts
         {
             var postRequest = CreateRequest(endpoint, RequestType.Post, payload);
             //UnityWebRequest.Post(endpoint, payload);
-            Console.WriteLine();
+            Console.WriteLine(payload.ToString());
             postRequest.SendWebRequest();
            
-
             while (!postRequest.isDone) await Task.Delay(10);
             var post = JsonConvert.DeserializeObject<T>(postRequest.downloadHandler.text);
             postRequest.Dispose();

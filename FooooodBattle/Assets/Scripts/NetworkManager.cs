@@ -7,6 +7,7 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SharedLibrary;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -76,5 +77,60 @@ public class NetworkManager : MonoBehaviour
         {
             NetworkManager.Instance.loginCanvas.gameObject.SetActive(false);
         }
+    }
+
+    public static async void newArenaSession(List<GameObject> ShopUnits, List<UnitSlot> Units)
+    {
+        List<ShopUnit> unitsShop = new List<ShopUnit>();
+        for(int i = 0; i < ShopUnits.Count; i++)
+        {
+            var unit = ShopUnits[i].GetComponent<Unit>();
+            ShopUnit shopUnit = new ShopUnit
+            {
+                UnitType = unit.Id,
+                Name = unit.Name,
+                Attack = unit.Attack,
+                Health = unit.Health,
+                Energy = unit.Energy,
+                partLevelCount = unit.partLevelCount,
+                partLevelMax = unit.partLevelMax,
+                Level = unit.Level
+            };
+            unitsShop.Add(shopUnit);
+        }
+
+        List<UnitObject> boughtUnits = new List<UnitObject>();
+        for (int i = 0; i < Units.Count; i++)
+        {
+            var shopSlotUnit = Units[i].Unit;
+            var unit = shopSlotUnit.GetComponent<Unit>();
+            UnitObject boughtUnit = new UnitObject
+            {
+                UnitType = unit.Id,
+                Name = unit.Name,
+                Attack = unit.Attack,
+                Health = unit.Health,
+                Energy = unit.Energy,
+                partLevelCount = unit.partLevelCount,
+                partLevelMax = unit.partLevelMax,
+                Level = unit.Level
+            };
+            boughtUnits.Add(boughtUnit);
+        }
+
+        ArenaDTO arenaDTO = new ArenaDTO
+        {
+            Turn = 10,
+            Wins = 0,
+            Health = 10,
+            Money = 10,
+            ShopUnits = unitsShop,
+            UnitsBought = boughtUnits,
+            Username = User,
+            Token = Token
+        };
+
+        await HttpClient.Post<ArenaDTO>("https://localhost:7125/api/arena", arenaDTO);
+
     }
 }

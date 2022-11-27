@@ -24,5 +24,8 @@ public class LevelManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode){
         SceneManager.SetActiveScene(scene);
+        //NetworkManager.newArenaSession(ArenaManager.Instance.CurrentShopUnits, ArenaManager.Instance.CurrentBoughtUnits);
     }
+
+    
 }
