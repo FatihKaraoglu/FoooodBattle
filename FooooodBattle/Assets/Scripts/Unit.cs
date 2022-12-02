@@ -7,7 +7,7 @@ using TMPro;
 public class Unit : MonoBehaviour
 {
     [SerializeField]
-    public int Id;
+    public int UnitType;
     [SerializeField]
     public string Name;
     [SerializeField]
@@ -27,4 +27,6 @@ public class Unit : MonoBehaviour
     public UnitSlot unitSlot;
 
     public bool bought = false;
+
+    public int Id;
 }

@@ -8,6 +8,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using SharedLibrary;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using Unity.Mathematics;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -87,14 +90,15 @@ public class NetworkManager : MonoBehaviour
             var unit = ShopUnits[i].GetComponent<Unit>();
             ShopUnit shopUnit = new ShopUnit
             {
-                UnitType = unit.Id,
+                UnitType = unit.UnitType,
                 Name = unit.Name,
                 Attack = unit.Attack,
                 Health = unit.Health,
                 Energy = unit.Energy,
                 partLevelCount = unit.partLevelCount,
                 partLevelMax = unit.partLevelMax,
-                Level = unit.Level
+                Level = unit.Level,
+                Locked = false,
             };
             unitsShop.Add(shopUnit);
         }
@@ -106,7 +110,7 @@ public class NetworkManager : MonoBehaviour
             var unit = shopSlotUnit.GetComponent<Unit>();
             UnitObject boughtUnit = new UnitObject
             {
-                UnitType = unit.Id,
+                UnitType = unit.UnitType,
                 Name = unit.Name,
                 Attack = unit.Attack,
                 Health = unit.Health,
@@ -132,5 +136,29 @@ public class NetworkManager : MonoBehaviour
 
         await HttpClient.Post<ArenaDTO>("https://localhost:7125/api/arena", arenaDTO);
 
+    }
+
+    public static async Task<ArenaDTO> getCurrentArenaSession()
+    {
+        UserDTO userDTO = new UserDTO
+        {
+            Username = User,
+            Token = Token
+        };
+        ArenaDTO arenaDTO = await HttpClient.Post<ArenaDTO>("https://localhost:7125/currentSession", userDTO);
+        return arenaDTO;
+    }
+
+    public static async Task<bool> buy(int money, UserDTO userDTO, UnitObject unit)
+    {
+        
+        BuyDTO buyDTO = new BuyDTO()
+        {
+            Money = money,
+            UserDTO = userDTO,
+            Unit = unit,
+        };
+        bool success = await HttpClient.Post<bool>("https://localhost:7125/currentSession",buyDTO);
+        return true;
     }
 }

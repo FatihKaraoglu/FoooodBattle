@@ -116,10 +116,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c17d815f26654942a65b812c482dc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 1
+  UnitType: 1
   Name: PogChampPepper
   Description: 
   Attack: 0
   Health: 0
   Energy: 0
+  partLevelCount: 0
+  partLevelMax: 0
   Level: 0
+  unitSlot:
+    Slot: {fileID: 0}
+    Unit: {fileID: 0}
+  bought: 0
+  Id: 1

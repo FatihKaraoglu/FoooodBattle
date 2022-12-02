@@ -1,3 +1,5 @@
+using SharedLibrary;
+using SharedLibrary.DTOs;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +11,36 @@ using UnityEngine.EventSystems;
 public class UnitSlots : MonoBehaviour, IDropHandler
 {
     //dropped == boughtUnit
-    public void OnDrop(PointerEventData eventData)
+    public async void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
         Debug.Log(dropped);
         DraggableShopCard draggableCard = dropped.GetComponent<DraggableShopCard>();
         if (ArenaManager.Instance.checkMoney())
         {
-            draggableCard.parentAfterDrag = transform;
-            //ArenaManager.Instance.Buy(gameObject, dropped);
-            mergeUnits(dropped);
-            ArenaManager.Instance.Buy(gameObject, dropped);
+            Unit unit = dropped.gameObject.GetComponent<Unit>();
+            bool success = await NetworkManager.buy(ArenaManager.Instance.getMoney(), new UserDTO
+            {
+                Username = NetworkManager.User,
+                Token = NetworkManager.Token
+            },
+            new UnitObject
+            {
+                Health = unit.Health,
+                Attack = unit.Attack,
+                Energy = unit.Energy,
+                UnitType = unit.UnitType,
+                Level = unit.Level,
+                partLevelCount = unit.partLevelCount,
+                partLevelMax = unit.partLevelMax,
+                Name = unit.name,
+                Id = unit.Id
+            }
+            );
+                draggableCard.parentAfterDrag = transform;
+                //ArenaManager.Instance.Buy(gameObject, dropped);
+                mergeUnits(dropped);
+                ArenaManager.Instance.Buy(gameObject, dropped);
             
         } 
     }
@@ -27,7 +48,7 @@ public class UnitSlots : MonoBehaviour, IDropHandler
     public void mergeUnits(GameObject dropped)
     {
         UnitSlot unitSlot = ArenaManager.Instance.CurrentBoughtUnits.Where(x => x.Slot == gameObject).FirstOrDefault(); 
-        if(unitSlot != null && unitSlot.Unit.GetComponent<Unit>().Id == dropped.GetComponent<Unit>().Id)
+        if(unitSlot != null && unitSlot.Unit.GetComponent<Unit>().UnitType == dropped.GetComponent<Unit>().UnitType)
         {
             Unit unit = unitSlot.Unit.GetComponent<Unit>();
             var toRemove = ArenaManager.Instance.CurrentBoughtUnits.Where(x => x.Unit == dropped).FirstOrDefault();

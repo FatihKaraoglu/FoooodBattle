@@ -1,9 +1,11 @@
+using SharedLibrary.DTOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,6 +31,8 @@ public class ArenaManager : MonoBehaviour
     public int RollCosts;
     [SerializeField]
     public int SellCost;
+
+    public ArenaDTO arenaDTO;
     void Awake()
     {
         if (Instance == null)
@@ -42,11 +46,14 @@ public class ArenaManager : MonoBehaviour
         }
 
         ShopCardsList = new List<GameObject>(Resources.LoadAll<GameObject>("ShopCards"));
+        
+        
     }
 
-    private void Start()
+    private async void Start()
     {
-        StartOfTurn();
+        arenaDTO = await NetworkManager.getCurrentArenaSession();
+        StartOfTurn(arenaDTO);
     }
 
     public void rollUnits()
@@ -71,9 +78,30 @@ public class ArenaManager : MonoBehaviour
         }   
     }
 
-    public void StartOfTurn() {
-        instantiateUnits();
-        NetworkManager.newArenaSession(ArenaManager.Instance.CurrentShopUnits, ArenaManager.Instance.CurrentBoughtUnits);
+    public void StartOfTurn(ArenaDTO arenaDTO) {
+        if (arenaDTO == null)
+        {
+            instantiateUnits();
+            NetworkManager.newArenaSession(ArenaManager.Instance.CurrentShopUnits, ArenaManager.Instance.CurrentBoughtUnits);
+        } else
+        {
+            instaniatateRunningSession(arenaDTO);
+        }
+        
+    }
+
+    public void instaniatateRunningSession(ArenaDTO arenaDTO)
+    {
+        clearCurrentShopUnits();
+        for (int i = 0; i < ShopCardsList.Count; ++i)
+        {
+            GameObject shopCard = Instantiate(ShopCardsList.Where(x => x.GetComponent<Unit>().UnitType == arenaDTO.ShopUnits[i].UnitType).First(), new Vector3(0,0,0), Quaternion.identity);
+            shopCard.GetComponent<Unit>().Id = arenaDTO.ShopUnits[i].Id;
+            setAttributes(shopCard);
+            shopCard.transform.SetParent(ShopSlots[i].GetComponent<RectTransform>(), false);
+            shopCard.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+            CurrentShopUnits.Add(shopCard);
+        }
     }
 
     public void setAttributes(GameObject shopCard)
@@ -90,8 +118,6 @@ public class ArenaManager : MonoBehaviour
         attack.text = unit.Attack.ToString();
         TextMeshProUGUI health = frontBox.transform.GetChild(5).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         health.text = unit.Health.ToString();
-
-        
     }
 
     private void clearCurrentShopUnits()
@@ -138,6 +164,12 @@ public class ArenaManager : MonoBehaviour
         {
             return true;
         }
+    }
+
+    public int getMoney()
+    {
+        int stat = Int16.Parse(MoneyStat.GetComponent<TextMeshProUGUI>().text);
+        return stat;
     }
 
     public void Sell()

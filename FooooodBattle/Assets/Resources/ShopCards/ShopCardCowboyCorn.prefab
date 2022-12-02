@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c17d815f26654942a65b812c482dc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 4
+  UnitType: 4
   Name: CowboyCorn
   Description: 
   Attack: 0
@@ -192,6 +192,11 @@ MonoBehaviour:
   partLevelCount: 0
   partLevelMax: 0
   Level: 0
+  unitSlot:
+    Slot: {fileID: 0}
+    Unit: {fileID: 0}
+  bought: 0
+  Id: 4
 --- !u!114 &7087273974557022774 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1448532309387815614, guid: f7e48c6b236005d45880d206756c2b05, type: 3}

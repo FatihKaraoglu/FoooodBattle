@@ -147,5 +147,9 @@ PrefabInstance:
       propertyPath: Name
       value: RoyalRadish
       objectReference: {fileID: 0}
+    - target: {fileID: 4031071465769094193, guid: 2f7a3d7f1e767214eb1debc845724d50, type: 3}
+      propertyPath: UnitType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f7a3d7f1e767214eb1debc845724d50, type: 3}

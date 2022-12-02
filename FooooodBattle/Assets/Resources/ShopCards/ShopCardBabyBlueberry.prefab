@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c17d815f26654942a65b812c482dc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 5
+  UnitType: 5
   Name: BabyBlueberry
   Description: 
   Attack: 3
@@ -123,3 +123,8 @@ MonoBehaviour:
   partLevelCount: 0
   partLevelMax: 2
   Level: 0
+  unitSlot:
+    Slot: {fileID: 0}
+    Unit: {fileID: 0}
+  bought: 0
+  Id: 5
