@@ -196,7 +196,7 @@ MonoBehaviour:
     Slot: {fileID: 0}
     Unit: {fileID: 0}
   bought: 0
-  Id: 4
+  Id: 0
 --- !u!114 &7087273974557022774 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1448532309387815614, guid: f7e48c6b236005d45880d206756c2b05, type: 3}

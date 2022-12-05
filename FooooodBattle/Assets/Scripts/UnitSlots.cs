@@ -15,6 +15,7 @@ public class UnitSlots : MonoBehaviour, IDropHandler
     {
         GameObject dropped = eventData.pointerDrag;
         Debug.Log(dropped);
+        Transform parentAfterDrag = transform;
         DraggableShopCard draggableCard = dropped.GetComponent<DraggableShopCard>();
         if (ArenaManager.Instance.checkMoney())
         {
@@ -34,12 +35,16 @@ public class UnitSlots : MonoBehaviour, IDropHandler
                 partLevelCount = unit.partLevelCount,
                 partLevelMax = unit.partLevelMax,
                 Name = unit.name,
-                Id = unit.Id
+                //Id = unit.Id
             }
             );
-                draggableCard.parentAfterDrag = transform;
-                //ArenaManager.Instance.Buy(gameObject, dropped);
-                mergeUnits(dropped);
+            Debug.Log("Transfrom = " + transform + " /// " + parentAfterDrag);
+            if (success == true)
+            {
+                draggableCard.parentAfterDrag = parentAfterDrag;
+            }
+           
+                //mergeUnits(dropped);
                 ArenaManager.Instance.Buy(gameObject, dropped);
             
         } 

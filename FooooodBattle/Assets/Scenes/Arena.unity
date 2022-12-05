@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408650735080340996, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
       propertyPath: m_Name
-      value: ShopCardSlot3
+      value: UnitSlot3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408650735080340996, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
       propertyPath: m_Name
-      value: ShopCardSlot2
+      value: UnitSlot2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
@@ -541,7 +541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408650735080340996, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
       propertyPath: m_Name
-      value: ShopCardSlot1
+      value: UnitSlot1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
@@ -1536,7 +1536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408650735080340996, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
       propertyPath: m_Name
-      value: ShopCardSlot5
+      value: UnitSlot5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
@@ -1873,7 +1873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408650735080340996, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}
       propertyPath: m_Name
-      value: ShopCardSlot4
+      value: UnitSlot4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a0073a8c12d47e419c7e2e84ac7fb96, type: 3}

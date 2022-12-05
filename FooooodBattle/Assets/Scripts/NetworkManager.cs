@@ -158,7 +158,7 @@ public class NetworkManager : MonoBehaviour
             UserDTO = userDTO,
             Unit = unit,
         };
-        bool success = await HttpClient.Post<bool>("https://localhost:7125/currentSession",buyDTO);
+        bool success = await HttpClient.Post<bool>("https://localhost:7125/buy",buyDTO);
         return true;
     }
 }

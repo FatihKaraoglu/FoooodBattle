@@ -144,6 +144,10 @@ PrefabInstance:
       value: 0.93725497
       objectReference: {fileID: 0}
     - target: {fileID: 4031071465769094193, guid: 2f7a3d7f1e767214eb1debc845724d50, type: 3}
+      propertyPath: Id
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4031071465769094193, guid: 2f7a3d7f1e767214eb1debc845724d50, type: 3}
       propertyPath: Name
       value: RoyalRadish
       objectReference: {fileID: 0}
